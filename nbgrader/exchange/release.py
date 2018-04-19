@@ -10,7 +10,7 @@ from stat import (
 from traitlets import Bool
 
 from .exchange import Exchange
-from ..utils import self_owned
+from ..noteable import self_owned
 
 
 class ExchangeRelease(Exchange):

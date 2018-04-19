@@ -12,5 +12,5 @@ __all__ = [
     "ExchangeFetch",
     "ExchangeList",
     "ExchangeRelease",
-    "ExchangeSubmit"
+    "ExchangeSubmit",
 ]

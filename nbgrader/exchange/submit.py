@@ -9,7 +9,8 @@ from textwrap import dedent
 from traitlets import Bool
 
 from .exchange import Exchange
-from ..utils import get_username, check_mode, find_all_notebooks
+from ..utils import check_mode, find_all_notebooks
+from ..noteable import get_username
 
 
 class ExchangeSubmit(Exchange):
