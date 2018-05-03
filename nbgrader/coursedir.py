@@ -15,7 +15,7 @@ class CourseDirectory(LoggingConfigurable):
     student_id = None
 
     if os.environ.get('NAAS_ROLE') != 'Instructor':
-        student_id = get_username
+        student_id = get_username()
 
     @validate('student_id')
     def _validate_student_id(self, proposal):
