@@ -13,7 +13,7 @@ from jupyter_core.paths import jupyter_data_dir
 
 from ..utils import check_directory
 from ..coursedir import CourseDirectory
-
+from ..noteable import get_coursename
 
 class ExchangeError(Exception):
     pass
@@ -21,16 +21,7 @@ class ExchangeError(Exception):
 
 class Exchange(LoggingConfigurable):
 
-    course_id = Unicode(
-        '',
-        help=dedent(
-            """
-            A key that is unique per instructor and course. This MUST be
-            specified, either by setting the config option, or using the
-            --course option on the command line.
-            """
-        )
-    ).tag(config=True)
+    course_id = get_coursename()
 
     @validate('course_id')
     def _validate_course_id(self, proposal):
