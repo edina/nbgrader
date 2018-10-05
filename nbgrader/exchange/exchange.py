@@ -21,7 +21,14 @@ class ExchangeError(Exception):
 
 class Exchange(LoggingConfigurable):
 
-    course_id = get_coursecode()
+    course_id = Unicode(
+        "",
+        help="Local cache directory for nbgrader submit and nbgrader list. Defaults to $JUPYTER_DATA_DIR/nbgrader_cache"
+    )
+
+    @default("course_id")
+    def _course_id_default(self):
+        return get_coursecode()
 
     @validate('course_id')
     def _validate_course_id(self, proposal):
