@@ -6,6 +6,7 @@ def get_username():
     
     This is the '1_abc' user, rather than the 'joyvan' user
     """
+    print("returning course code")
     return os.environ.get('JUPYTERHUB_USER', None)
 
 def get_coursecode():
@@ -13,6 +14,7 @@ def get_coursecode():
     
     This has come via the LTI connection
     """
+    print("returning course code")
     return os.environ.get('NAAS_COURSE_CODE', None)
 
 def self_owned(path):
