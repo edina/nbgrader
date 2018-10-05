@@ -21,7 +21,7 @@ class ExchangeError(Exception):
 
 class Exchange(LoggingConfigurable):
 
-    course_id = get_coursename()
+    course_id = get_coursecode()
 
     @validate('course_id')
     def _validate_course_id(self, proposal):
