@@ -18,7 +18,7 @@ from ...apps import NbGrader
 from ...coursedir import CourseDirectory
 from ...exchange import ExchangeList, ExchangeFetch, ExchangeSubmit
 from ... import __version__ as nbgrader_version
-
+from ...noteable import get_coursecode
 
 static = os.path.join(os.path.dirname(__file__), 'static')
 
@@ -39,11 +39,14 @@ class AssignmentList(LoggingConfigurable):
         return self.parent.notebook_dir
 
     def load_config(self):
+        self.log.info("##### load config")
         paths = jupyter_config_path()
         paths.insert(0, os.getcwd())
 
         config_found = False
         full_config = Config()
+
+        full_config.Exchange.course_id = get_coursecode()
         for config in NbGrader._load_config_files("nbgrader_config", path=paths, log=self.log):
             full_config.merge(config)
             config_found = True

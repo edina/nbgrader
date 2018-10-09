@@ -13,7 +13,7 @@ from jupyter_core.paths import jupyter_data_dir
 
 from ..utils import check_directory
 from ..coursedir import CourseDirectory
-
+from ..noteable import get_coursecode
 
 class ExchangeError(Exception):
     pass
