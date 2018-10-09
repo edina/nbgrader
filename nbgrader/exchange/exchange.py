@@ -13,7 +13,7 @@ from jupyter_core.paths import jupyter_data_dir
 
 from ..utils import check_directory
 from ..coursedir import CourseDirectory
-from ..noteable import get_coursecode
+
 
 class ExchangeError(Exception):
     pass
@@ -22,13 +22,19 @@ class ExchangeError(Exception):
 class Exchange(LoggingConfigurable):
 
     course_id = Unicode(
-        "",
-        help="The course_code for this course"
+        '',
+        help=dedent(
+            """
+            A key that is unique per instructor and course. This MUST be
+            specified, either by setting the config option, or using the
+            --course option on the command line.
+            """
+        )
     ).tag(config=True)
 
-    @default("cache")
-    def _course_id_default:
-      return get_coursecode()
+    @default('course_id')
+    def _default_courseid(self):
+        return get_coursecode()
 
     @validate('course_id')
     def _validate_course_id(self, proposal):
