@@ -51,15 +51,15 @@ class AssignmentList(LoggingConfigurable):
         if not config_found:
             self.log.warning("No nbgrader_config.py file found. Rerun with DEBUG log level to see where nbgrader is looking.")
 
-        print("##### full config:{}".format(full_config))
+        self.log.info("##### full config:{}".format(full_config))
         return full_config
 
     def list_released_assignments(self, course_id=None):
-        print("##### list_released_assignments")
+        self.log.info("##### list_released_assignments")
         with chdir(self.assignment_dir):
             try:
                 config = self.load_config()
-                print("##### list_released_assignments has course_id: {} and config {}".format(course_id, config))
+                self.log.info("##### list_released_assignments has course_id: {} and config {}".format(course_id, config))
                 if course_id:
                     config.Exchange.course_id = course_id
 
@@ -88,7 +88,7 @@ class AssignmentList(LoggingConfigurable):
         return retvalue
 
     def list_submitted_assignments(self, course_id=None):
-        print("##### list_submitted_assignments")
+        self.log.info("##### list_submitted_assignments")
         with chdir(self.assignment_dir):
             try:
                 config = self.load_config()
@@ -116,7 +116,7 @@ class AssignmentList(LoggingConfigurable):
         return retvalue
 
     def list_assignments(self, course_id=None):
-        print("##### list_assignments")
+        self.log.info("##### list_assignments")
         released = self.list_released_assignments(course_id=course_id)
         if not released['success']:
             return released
@@ -133,7 +133,7 @@ class AssignmentList(LoggingConfigurable):
         return retvalue
 
     def list_courses(self):
-        print("##### list_courses")
+        self.log.info("##### list_courses")
         assignments = self.list_assignments()
         if not assignments["success"]:
             return assignments
@@ -200,6 +200,7 @@ class BaseAssignmentHandler(IPythonHandler):
 
     @property
     def manager(self):
+        self.log.info("#### baseAssignmentHandler")
         return self.settings['assignment_list_manager']
 
 
@@ -207,7 +208,7 @@ class AssignmentListHandler(BaseAssignmentHandler):
 
     @web.authenticated
     def get(self):
-        print("#### AssignmentListHandler makes call")
+        self.log.info("#### AssignmentListHandler makes call")
         course_id = self.get_argument('course_id')
         self.finish(json.dumps(self.manager.list_assignments(course_id=course_id)))
 
@@ -235,7 +236,7 @@ class CourseListHandler(BaseAssignmentHandler):
 
     @web.authenticated
     def get(self):
-        print("#### CourseListHandler makes call")
+        self.log.info("#### CourseListHandler makes call")
         self.finish(json.dumps(self.manager.list_courses()))
 
 
