@@ -127,6 +127,7 @@ class AssignmentHandler(BaseApiHandler):
         assignment_id = assignment_id.strip()
         self.gradebook.update_or_create_assignment(assignment_id, **assignment)
         sourcedir = os.path.abspath(self.coursedir.format_path(self.coursedir.source_directory, '.', assignment_id))
+        self.log.info("##### sourcedir: {}".format(sourcedir))
         if not os.path.isdir(sourcedir):
             os.makedirs(sourcedir)
         self.write(json.dumps(self.api.get_assignment(assignment_id)))
