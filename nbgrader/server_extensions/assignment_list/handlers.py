@@ -55,6 +55,7 @@ class AssignmentList(LoggingConfigurable):
         return full_config
 
     def list_released_assignments(self, course_id=None):
+        print("##### list_released_assignments")
         with chdir(self.assignment_dir):
             try:
                 config = self.load_config()
@@ -87,6 +88,7 @@ class AssignmentList(LoggingConfigurable):
         return retvalue
 
     def list_submitted_assignments(self, course_id=None):
+        print("##### list_submitted_assignments")
         with chdir(self.assignment_dir):
             try:
                 config = self.load_config()
@@ -114,6 +116,7 @@ class AssignmentList(LoggingConfigurable):
         return retvalue
 
     def list_assignments(self, course_id=None):
+        print("##### list_assignments")
         released = self.list_released_assignments(course_id=course_id)
         if not released['success']:
             return released
@@ -130,6 +133,7 @@ class AssignmentList(LoggingConfigurable):
         return retvalue
 
     def list_courses(self):
+        print("##### list_courses")
         assignments = self.list_assignments()
         if not assignments["success"]:
             return assignments
@@ -203,6 +207,7 @@ class AssignmentListHandler(BaseAssignmentHandler):
 
     @web.authenticated
     def get(self):
+        print("#### AssignmentListHandler makes call")
         course_id = self.get_argument('course_id')
         self.finish(json.dumps(self.manager.list_assignments(course_id=course_id)))
 
