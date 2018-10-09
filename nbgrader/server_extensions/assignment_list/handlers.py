@@ -51,12 +51,14 @@ class AssignmentList(LoggingConfigurable):
         if not config_found:
             self.log.warning("No nbgrader_config.py file found. Rerun with DEBUG log level to see where nbgrader is looking.")
 
+        print("##### full config:{}".format(full_config))
         return full_config
 
     def list_released_assignments(self, course_id=None):
         with chdir(self.assignment_dir):
             try:
                 config = self.load_config()
+                print("##### list_released_assignments has course_id: {} and config {}".format(course_id, config))
                 if course_id:
                     config.Exchange.course_id = course_id
 
@@ -228,6 +230,7 @@ class CourseListHandler(BaseAssignmentHandler):
 
     @web.authenticated
     def get(self):
+        print("#### CourseListHandler makes call")
         self.finish(json.dumps(self.manager.list_courses()))
 
 
