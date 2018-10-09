@@ -14,10 +14,7 @@ def get_coursecode():
     
     This has come via the LTI connection
     """
-    self.log.info("returning course code", os.environ.get('NAAS_COURSE_CODE', None))
-    course_code = os.environ.get('NAAS_COURSE_CODE', None)
-    self.log.info("######## course_id:{}".format(couse_code))
-    return course_code
+    return os.environ.get('NAAS_COURSE_CODE', None)
 
 def self_owned(path):
     """Is the path owned by the current user of this process?"""
