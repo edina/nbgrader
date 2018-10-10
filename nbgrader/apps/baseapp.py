@@ -17,7 +17,6 @@ from traitlets.config.application import catch_config_error
 from traitlets.config.loader import Config
 
 from ..coursedir import CourseDirectory
-from ..noteable import get_coursecode
 
 nbgrader_aliases = {
     'log-level' : 'Application.log_level',
@@ -226,7 +225,6 @@ class NbGrader(JupyterApp):
         super(NbGrader, self)._load_config(cfg, **kwargs)
         if self.coursedir:
             self.coursedir._load_config(cfg)
-        cfg.Exchange.course_id = get_coursecode()
 
     def fail(self, msg, *args):
         """Log the error msg using self.log.error and exit using sys.exit(1)."""

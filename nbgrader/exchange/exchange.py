@@ -22,7 +22,7 @@ class ExchangeError(Exception):
 class Exchange(LoggingConfigurable):
 
     course_id = Unicode(
-        '',
+        get_coursecode(),
         help=dedent(
             """
             A key that is unique per instructor and course. This MUST be
@@ -31,10 +31,6 @@ class Exchange(LoggingConfigurable):
             """
         )
     ).tag(config=True)
-
-    @default('course_id')
-    def _default_courseid(self):
-        return get_coursecode()
 
     @validate('course_id')
     def _validate_course_id(self, proposal):

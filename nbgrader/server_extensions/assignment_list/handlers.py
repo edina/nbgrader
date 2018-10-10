@@ -18,7 +18,6 @@ from ...apps import NbGrader
 from ...coursedir import CourseDirectory
 from ...exchange import ExchangeList, ExchangeFetch, ExchangeSubmit
 from ... import __version__ as nbgrader_version
-from ...noteable import get_coursecode
 
 static = os.path.join(os.path.dirname(__file__), 'static')
 
@@ -53,7 +52,7 @@ class AssignmentList(LoggingConfigurable):
         if not config_found:
             self.log.warning("No nbgrader_config.py file found. Rerun with DEBUG log level to see where nbgrader is looking.")
 
-        full_config.Exchange.course_id = course_code = get_coursecode()
+        # full_config.Exchange.course_id = get_coursecode()
         self.log.info("##### full config:{}".format(full_config))
         return full_config
 
