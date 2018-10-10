@@ -7,7 +7,7 @@ from traitlets.config import LoggingConfigurable
 from traitlets import Unicode, List, default, validate, TraitError
 
 from .utils import full_split, parse_utc
-from .noteable import get_username
+from .noteable import get_username, get_coursecode
 
 class CourseDirectory(LoggingConfigurable):
 
@@ -173,7 +173,7 @@ class CourseDirectory(LoggingConfigurable):
     ).tag(config=True)
 
     root = Unicode(
-        '',
+        '/home/jovyan/courses/'.get_coursecode(),
         help=dedent(
             """
             The root directory for the course files (that includes the `source`,
@@ -182,10 +182,6 @@ class CourseDirectory(LoggingConfigurable):
             """
         )
     ).tag(config=True)
-
-    @default("root")
-    def _root_default(self):
-        return os.getcwd()
 
     ignore = List(
         [
