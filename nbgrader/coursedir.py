@@ -173,7 +173,7 @@ class CourseDirectory(LoggingConfigurable):
     ).tag(config=True)
 
     root = Unicode(
-        '',
+        '/home/jovyan/courses/' + get_coursecode(),
         help=dedent(
             """
             The root directory for the course files (that includes the `source`,
