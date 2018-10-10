@@ -53,7 +53,7 @@ class AssignmentList(LoggingConfigurable):
         if not config_found:
             self.log.warning("No nbgrader_config.py file found. Rerun with DEBUG log level to see where nbgrader is looking.")
 
-        full_config.Exchange.course_id = course_code = os.environ.get('NAAS_COURSE_CODE', None)
+        full_config.Exchange.course_id = course_code = get_coursecode()
         self.log.info("##### full config:{}".format(full_config))
         return full_config
 
